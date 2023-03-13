@@ -101,6 +101,8 @@ namespace {
             } else {
                 $buffer = '';
                 $buffer_valid = false;
+                
+                #mcrypt_create_iv is DEPRECATED an alternative is random_bytes()
                 if (function_exists('mcrypt_create_iv') && !defined('PHALANGER')) {
                     $buffer = mcrypt_create_iv($raw_salt_len, MCRYPT_DEV_URANDOM);
                     if ($buffer) {
