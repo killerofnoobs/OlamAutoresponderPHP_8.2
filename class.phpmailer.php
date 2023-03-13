@@ -2571,6 +2571,11 @@ class PHPMailer
      */
     protected function encodeFile($path, $encoding = 'base64')
     {
+        
+        /*
+        (Emmanuel) the magic_quotes functions and magic_quotes have been removed as of 8.0
+        if this try block has something important then we can actually get rid of magic_quotes
+        */
         try {
             if (!is_readable($path)) {
                 throw new phpmailerException($this->lang('file_open') . $path, self::STOP_CONTINUE);
