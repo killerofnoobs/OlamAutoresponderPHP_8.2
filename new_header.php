@@ -1,7 +1,7 @@
+<?php
+
 // edit 2023 CW
 // no changes to 8.2
-
-<?php
 
 // This file is part of Olam Autoresponder.
 // Copyright (c) 2004-2007 Aaron Colman and Adaptive Business Design.
