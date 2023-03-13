@@ -1,4 +1,6 @@
 <?php
+// No changes needed for 8.2 upgrade - Camden Salser
+// 
 // This file is part of Olam Autoresponder.
 // Copyright (c) 2004-2007 Aaron Colman and Adaptive Business Design.
 // Copyright (c) 2016 Anna Burdette, Benjamin Jobson, and David Reed.
