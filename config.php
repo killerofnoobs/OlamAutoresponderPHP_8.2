@@ -4,7 +4,7 @@
 # See license.txt for license information.
 # ------------------------------------------------
 
-# Database information goes here. Server, user, password and database.
+# Database information goes here. Server, user, password and database. Camden Salser
 $MySQL_server   = 'localhost';
 $MySQL_user     = 'infinite';
 $MySQL_password = '5tH7w34GlU';
