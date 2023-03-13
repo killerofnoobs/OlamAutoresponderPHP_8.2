@@ -1,4 +1,8 @@
 <?php 
+
+// edit 2023 CW
+// no changes required for 8.2
+
 # ------------------------------------------------
 # License and copyright:
 # See license.txt for license information.
