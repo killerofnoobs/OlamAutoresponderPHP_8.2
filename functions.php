@@ -405,6 +405,14 @@ function removeFromList($list, $ItemToRemove)
 }
 
 # ---------------------------------------------------------
+/*
+// Used in processMessageTags()
+function nullToString($thing) {
+    if (isNull($thing)) {
+        $thing = "";
+    }
+}
+*/
 
 function processMessageTags()
 {
@@ -417,7 +425,23 @@ function processMessageTags()
     global $DB_IPaddy, $DB_ReferralSource, $DB_OptInRedir, $DB_UniqueCode;
     global $DB_OptOutRedir, $DB_OptInDisplay, $DB_OptOutDisplay;
     global $DB, $cop, $newline;
-
+    
+    /*
+    Change values from null to an empty string since passing null to preg_replace() is deprecated.
+    Some of the above values are explicitly set to non-null values during this function.
+    Not all these may be necessary, but time constraints during the 2023 Lightsys Code-a-thon make researching the other uses of these variables impractical.
+    
+    nullToString($DB_EmailAddress); nullToString($DB_LastActivity); nullToString($DB_FirstName);
+    nullToString($DB_LastName); nullToString($DB_ResponderName); nullToString($DB_OwnerEmail);
+    nullToString($DB_OwnerName); nullToString($DB_ReplyToEmail); nullToString($DB_ResponderDesc);
+    nullToString($DB_MsgSub);
+    nullToString($UnsubURL); nullToString($siteURL);
+    nullToString($ResponderDirectory); nullToString($DB_SubscriberID);
+    nullToString($DB_IPaddy); nullToString($DB_ReferralSource);
+    nullToString($DB_OptInRedir); nullToString($DB_UniqueCode);
+    nullToString($DB_OptOutRedir); nullToString($DB_OptInDisplay); nullToString($DB_OptOutDisplay);
+    */
+    
     # Wednesday May 9, 2007
     # $date_format = 'l \t\h\e jS \of F\, Y';
     $date_format = 'F j\, Y';
@@ -768,6 +792,8 @@ function sendMessageTemplate($filename = "", $to_address = "", $from_address = "
     $Send_Subject = stripNewlines(str_replace("|", "", $Send_Subject));
     $Message_Body = str_replace("|", "", $Message_Body);
     $Message_Headers = str_replace("|", "", $Message_Headers);
+    // Attempted replacement of depreciated utf8_decode with more updated function:
+    // $Message_Body = mb_convert_encoding($Message_Body, 'ISO-8859-1', 'UTF-8');
     $Message_Body = utf8_decode($Message_Body);
 
     # Send the mail
