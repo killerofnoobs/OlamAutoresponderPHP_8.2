@@ -1,4 +1,7 @@
 <?php
+// Edited March 14, 2023
+// Changes were made - Camden Salser
+//
 // This file is part of Olam Autoresponder.
 // Copyright (c) 2004-2007 Aaron Colman and Adaptive Business Design.
 // Copyright (c) 2016 Anna Burdette, Benjamin Jobson, and David Reed.
@@ -38,11 +41,13 @@ session_start();
 require_once 'functions.php';
 
 # Set the siteURL
-if ((!isset($_SERVER['HTTPS'])) || ((strtolower($_SERVER['HTTPS'])) === "off")) {
-    $siteURL = "http://" . $_SERVER['HTTP_HOST'];
-} else {
-    $siteURL = "https://" . $_SERVER['HTTP_HOST'];
-}
+//if (isset( $_SERVER) || isset( $siteURL){ - Camden Salser
+    if ((!isset($_SERVER['HTTPS'])) || ((strtolower($_SERVER['HTTPS'])) === "off")) {
+        $siteURL = "http://" . $_SERVER['HTTP_HOST'];
+    } else {
+        $siteURL = "https://" . $_SERVER['HTTP_HOST'];
+    }
+//} - Camden Salser
 
 # Timezone's don't really matter for this app, but we have to set one since older
 #   versions of CentOS often don't provide a default
