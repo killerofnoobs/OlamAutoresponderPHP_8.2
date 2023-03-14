@@ -1,4 +1,6 @@
 <?php
+# Edited March 14, 2023
+# No changes needed for upgrade - Camden Salser
 # ---------------------------------------------------------
 # Set the valid responder numbers
 $responder_list = array();
