@@ -2571,16 +2571,14 @@ class PHPMailer
      */
     protected function encodeFile($path, $encoding = 'base64')
     {
+
+        #commenting out the magic_quotes variables and functions due to this feature being removed (Emmanuel)
         
-        /*
-        (Emmanuel) the magic_quotes functions and magic_quotes have been removed as of 8.0
-        if this try block has something important then we can actually get rid of magic_quotes
-        */
         try {
             if (!is_readable($path)) {
                 throw new phpmailerException($this->lang('file_open') . $path, self::STOP_CONTINUE);
             }
-            $magic_quotes = get_magic_quotes_runtime();
+            /* $magic_quotes = get_magic_quotes_runtime();
             if ($magic_quotes) {
                 if (version_compare(PHP_VERSION, '5.3.0', '<')) {
                     set_magic_quotes_runtime(false);
@@ -2590,16 +2588,17 @@ class PHPMailer
                     //so it will never get here
                     ini_set('magic_quotes_runtime', false);
                 }
-            }
+            } */
             $file_buffer = file_get_contents($path);
             $file_buffer = $this->encodeString($file_buffer, $encoding);
-            if ($magic_quotes) {
+            
+            /* if ($magic_quotes) {
                 if (version_compare(PHP_VERSION, '5.3.0', '<')) {
                     set_magic_quotes_runtime($magic_quotes);
                 } else {
                     ini_set('magic_quotes_runtime', $magic_quotes);
                 }
-            }
+            } */
             return $file_buffer;
         } catch (Exception $exc) {
             $this->setError($exc->getMessage());
