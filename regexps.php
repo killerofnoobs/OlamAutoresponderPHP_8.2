@@ -1,4 +1,8 @@
 <?php
+
+// Edit 2023 CW
+// No code edits, only comments changing # to //
+
 // This file is part of Olam Autoresponder.
 // Copyright (c) 2004-2007 Aaron Colman and Adaptive Business Design.
 // Copyright (c) 2016 Anna Burdette, Benjamin Jobson, and David Reed.
@@ -18,13 +22,13 @@
 include('common.php');
 requireUserToBeLoggedIn();
 
-# ------------------------------------------------
+// ------------------------------------------------
 
 function regexpExists($regexp_id)
 {
     global $DB;
 
-    # Bounds check
+    // Bounds check
     if (isEmpty($regexp_id)) {
         return FALSE;
     }
@@ -35,7 +39,7 @@ function regexpExists($regexp_id)
         return FALSE;
     }
 
-    # Check for it's existance
+    // Check for it's existance
     $query = "SELECT * FROM InfResp_BounceRegs WHERE BounceRegexpID = '$regexp_id'";
     $result = $DB->query($query) or die("Invalid query: " . $DB->error);
     if ($result->num_rows > 0) {
@@ -45,48 +49,48 @@ function regexpExists($regexp_id)
     }
 }
 
-# ------------------------------------------------
+// ------------------------------------------------
 
-# Get the action var
+// Get the action var
 $action = strtolower(makeSafe($_REQUEST['action']));
 
-# Top template
+// Top template
 include('templates/open.page.php');
 
-# Cpanel top
+// Cpanel top
 $help_section = "regexps";
 include('templates/controlpanel.php');
 
-# Set address
+// Set address
 $address = makeSafe($_REQUEST['address']);
 
-# Process actions
+// Process actions
 if ($action == "add") {
     $regexp = makeSafe($_REQUEST['regx']);
     $query = "SELECT * FROM InfResp_BounceRegs WHERE RegX = '$regexp'";
     $result = $DB->query($query) or die("Invalid query: " . $DB->error);
     if ($result->num_rows > 0) {
-        # Print msg
+        // Print msg
         print "<p class=\"big_header\">That Regexp Already Exists!</p>\n";
     } else {
         $query = "INSERT INTO InfResp_BounceRegs (RegX) VALUES ('$regexp')";
         $result = $DB->query($query) OR die("Invalid query: " . $DB->error);
         $regx_id = $DB->insert_id;
 
-        # Print msg
+        // Print msg
         print "<p class=\"big_header\">Regexp Added!</p>\n";
     }
 } elseif ($action == "remove") {
     $regexp_id = makeSafe($_REQUEST['regx']);
     if (regexpExists($regexp_id)) {
-        # Delete from the regexp table
+        // Delete from the regexp table
         $query = "DELETE FROM InfResp_BounceRegs WHERE BounceRegexpID = '$regexp_id'";
         $result = $DB->query($query) OR die("Invalid query: " . $DB->error);
 
-        # Print msg
+        // Print msg
         print "<p class=\"big_header\">Bouncer Regexp Deleted!</p>\n";
     } else {
-        # Print msg
+        // Print msg
         print "<p class=\"big_header\">That Regexp Wasn't Found!</p>\n";
     }
 }
@@ -95,7 +99,7 @@ print "<p class=\"big_header\">- Bouncer Regexps -</p>\n";
 $query = "SELECT * FROM InfResp_BounceRegs";
 $DB_result = $DB->query($query) or die("Invalid query: " . $DB->error);
 if ($DB_result->num_rows > 0) {
-    # Remove regexp box
+    // Remove regexp box
     print "<center>\n";
     print "<FORM action=\"regexps.php\" method=POST> \n";
     print "<select name=\"regx\" size=\"10\">\n";
@@ -112,12 +116,12 @@ if ($DB_result->num_rows > 0) {
     print "<br /><strong>No Regexps Found!</strong><br /><br />\n";
 }
 
-# Template for "add new"
+// Template for "add new"
 include('templates/add_new.regexps.php');
 
-# Template for "Back to admin"
+// Template for "Back to admin"
 include('templates/admin_button.regexps.php');
 
-# Template bottom
+// Template bottom
 copyright();
 include('templates/close.page.php');
